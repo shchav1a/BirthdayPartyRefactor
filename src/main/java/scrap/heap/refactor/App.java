@@ -1,38 +1,42 @@
 package scrap.heap.refactor;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import scrap.heap.refactor.controller.OrderManager;
+import scrap.heap.refactor.model.*;
 
+public class App {
     public static void main(String[] args) {
 
-         //Place birthday party orders
-         order("red", "mylar", "4", "chocolate", "chocolate", "circle", "large", "brown" );
-         order("blue", "latex", "7", "Vanilla", "chocelate", "square", "med", "brown" );
-         order("yellow", "mylar", "4", "vanilla", "vanilla", "square", "small", "yellow" );
+        final OrderManager manager = new OrderManager();
+
+        //Place birthday party orders
+        //order("red", "mylar", "4", "chocolate", "chocolate", "circle", "large", "brown" );
+        Balloons balloonsOrder1 = Balloons.builder()
+                .balloonColor(Color.RED).material(Material.MYLAR).number(4).build();
+        Cake cakeOrder1 = Cake.builder()
+                .flavor(Flavor.CHOCOLATE).frostingFlavor(Flavor.CHOCOLATE).shape(Shape.CIRCLE).size(Size.LARGE).cakeColor(Color.BROWN).build();
+        Order order1 = Order.builder().cake(cakeOrder1).balloons(balloonsOrder1).build();
+        manager.create(order1);
+
+        //order("blue", "latex", "7", "Vanilla", "chocelate", "square", "med", "brown" );
+        Balloons balloonsOrder2 = Balloons.builder()
+                .balloonColor(Color.BLUE).material(Material.LATEX).number(7).build();
+        Cake cakeOrder2 = Cake.builder()
+                .flavor(Flavor.VANILLA).frostingFlavor(Flavor.CHOCOLATE).shape(Shape.SQUARE).size(Size.MED).cakeColor(Color.BROWN).build();
+        Order order2 = Order.builder().cake(cakeOrder2).balloons(balloonsOrder2).build();
+        manager.create(order2);
+
+        //order("yellow", "mylar", "4", "vanilla", "vanilla", "square", "small", "yellow" );
+        Balloons balloonsOrder3 = Balloons.builder()
+                .balloonColor(Color.YELLOW).material(Material.MYLAR).number(4).build();
+        Cake cakeOrder3 = Cake.builder()
+                .flavor(Flavor.VANILLA).frostingFlavor(Flavor.VANILLA).shape(Shape.SQUARE).size(Size.SMALL).cakeColor(Color.YELLOW).build();
+        Order order3 = Order.builder().cake(cakeOrder3).balloons(balloonsOrder3).build();
+        manager.create(order3);
 
     }
 
-    private static void order(String balloonColor, String material, String number, String flavor, String frostingFlavor, String shape, String size, String cakeColor){
-
-        orderBalloons(balloonColor, material, number);
-
-        orderCake(frostingFlavor, flavor, shape, size, cakeColor);
-    }
-
-    private static void orderBalloons(String balloonColor, String material, String number){
-
-        //for the purposes of this exercise, pretend this method works and adds balloons to the order
-        System.out.println("Balloons ordered; " + balloonColor + ", " + material  + ", " + number);
-
-    }
-
-    private static void orderCake(String flavor, String frostingFlavor, String shape, String size, String cakeColor){
-
-        //for the purposes of this exercise, pretend that this method adds a cake to the order
-        System.out.println("cake ordered; " + flavor + ", " + frostingFlavor  + ", " + shape + ", " + size + ", " + cakeColor);
-
+    public String getGreeting() {
+        return "Hello world.";
     }
 
 }
